@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMI - Dashboard Cardio-Vasculaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="AMI Logo">
+                <h2>AFIA</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="index.html"><i class="fas fa-home"></i> Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="patients.html"><i class="fas fa-user-injured"></i> Patients</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-heartbeat"></i> Diagnostics</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-calendar-alt"></i> Rendez-vous</a>
+                </li>
+                <li>
+                    <a href="statistique.html"><i class="fas fa-chart-line"></i> Statistiques</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+                </li>
+            </ul>
+            <!-- Button to toggle the sidebar on smaller screens -->
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <h1>Tableau de Bord</h1>
+                    <p>Assistant Médical Intelligent - Cardio-Vasculaire</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Rechercher...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="doctor-avatar.png" alt="Profile">
+                        <span>Dr. Martin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Statistics Cards -->
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3>Patients Totaux</h3>
+                        <p>1,234</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hospital-user"></i>
+                    <div class="stat-info">
+                        <h3>Nouveaux Patients</h3>
+                        <p>28</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <div class="stat-info">
+                        <h3>RDV Aujourd'hui</h3>
+                        <p>12</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-heart"></i>
+                    <div class="stat-info">
+                        <h3>Cas Critiques</h3>
+                        <p>5</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="chart-container">
+                    <h3>Évolution des Cas</h3>
+                    <canvas id="casesChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Distribution des Pathologies</h3>
+                    <canvas id="pathologiesChart"></canvas>
+                </div>
+
+                <!-- Recent Patients Table -->
+                <div class="recent-patients">
+                    <h3>Patients Récents</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Diagnostic</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jean Dupont</td>
+                                <td>Hypertension</td>
+                                <td>23/11/2023</td>
+                                <td><span class="status stable">Stable</span></td>
+                            </tr>
+                            <tr>
+                                <td>Marie Martin</td>
+                                <td>Diabete</td>
+                                <td>23/11/2023</td>
+                                <td><span class="status critical">Critique</span></td>
+                            </tr>
+                            <tr>
+                                <td>Paul Bernard</td>
+                                <td>Insuffisance cardiaque</td>
+                                <td>22/11/2023</td>
+                                <td><span class="status observation">En observation</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Graphique pour l'évolution des cas
+        var ctx1 = document.getElementById('casesChart').getContext('2d');
+        var casesChart = new Chart(ctx1, {
+            type: 'line', // Type de graphique (ligne)
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'], // Mois
+                datasets: [{
+                    label: 'Cas Confirmés',
+                    data: [100, 120, 130, 145, 160, 175, 185, 200, 210, 225, 250, 270], // Données des cas
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                    tension: 0.1
+                }]
+            }
+        });
+
+        // Graphique pour la distribution des pathologies
+        var ctx2 = document.getElementById('pathologiesChart').getContext('2d');
+        var pathologiesChart = new Chart(ctx2, {
+            type: 'pie', // Type de graphique (camembert)
+            data: {
+                labels: ['Hypertension', 'Diabète', 'Insuffisance cardiaque', 'Autres'], // Types de pathologies
+                datasets: [{
+                    data: [40, 30, 20, 10], // Données de distribution
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                }]
+            }
+        });
+    </script>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>

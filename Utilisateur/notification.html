@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AFIA - Espace Patient</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="user-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="AFIA Logo" />
+          <h2>AFIA</h2>
+        </div>
+        <ul class="nav-links">
+          <li class="active">
+            <a href="user-dashboard.html"><i class="fas fa-heart"></i> </a>
+          </li>
+          <li>
+            <a href="notification.html"><i class="fas fa-bell"></i></a>
+          </li>
+          <li>
+            <a href="parametre.html"><i class="fas fa-cog"></i> </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header>
+          <div class="header-left">
+            <h1>Mon Espace Santé</h1>
+            <p>Suivi Personnel - AFIA</p>
+          </div>
+          <div class="header-right">
+            <div class="notifications">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile">
+              <img src="user-avatar.png" alt="Profile" />
+              <span>Jean Dupont</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-grid">
+          <!-- État de santé actuel -->
+          <!-- Health Status Card -->
+          <div class="health-status-card">
+            <h3>État de Santé Actuel</h3>
+            <div class="vital-signs">
+              <div class="vital-sign" onclick="showDetailedInfo('heartRate')">
+                <i class="fas fa-heartbeat"></i>
+                <p>Rythme Cardiaque</p>
+                <h4>75 BPM</h4>
+              </div>
+              <div
+                class="vital-sign"
+                onclick="showDetailedInfo('bloodPressure')"
+              >
+                <i class="fas fa-stethoscope"></i>
+                <p>Tension Artérielle</p>
+                <h4>120/80</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Placeholder for Additional Cards (detailed info) -->
+          <div id="additional-info-container"></div>
+
+          <!-- Dernières notifications -->
+          <div class="notifications-card">
+            <h3>Notifications Récentes</h3>
+            <div class="notification-list">
+              <div
+                class="notification"
+                onclick="showModal('message', 'Il y a 2 heures', 'Message du Dr. Martin')"
+              >
+                <i class="fas fa-message"></i>
+                <div class="notification-content">
+                  <p>Message du Dr. Martin</p>
+                  <span>Il y a 2 heures</span>
+                </div>
+              </div>
+              <div
+                class="notification"
+                onclick="showModal('reminder', 'Il y a 5 heures', 'Rappel de médicament')"
+              >
+                <i class="fas fa-pills"></i>
+                <div class="notification-content">
+                  <p>Rappel de médicament</p>
+                  <span>Il y a 5 heures</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal for Message -->
+          <div id="message-modal" class="notification-modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header">Message du Dr. Martin</div>
+            <div class="modal-content">
+              <p>
+                Il y a 2 heures : Il est important de suivre les recommandations
+                du docteur pour la gestion de votre traitement.
+              </p>
+            </div>
+          </div>
+
+          <!-- Modal for Medication Reminder -->
+          <div id="reminder-modal" class="notification-modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header">Rappel de médicament</div>
+            <div class="modal-content">
+              <p>
+                Il y a 5 heures : N'oubliez pas de prendre votre médicament à
+                l'heure indiquée.
+              </p>
+            </div>
+          </div>
+
+          <!-- Paramètres du compte -->
+          <div class="settings-card">
+            <h3>Paramètres du Compte</h3>
+            <div class="settings-list">
+              <div class="setting-item">
+                <i class="fas fa-user"></i>
+                <span>Informations personnelles</span>
+              </div>
+              <div class="setting-item">
+                <i class="fas fa-bell"></i>
+                <span>Préférences de notification</span>
+              </div>
+              <div class="setting-item">
+                <i class="fas fa-lock"></i>
+                <span>Sécurité du compte</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      function showModal(type, time, title) {
+        let modalId = type === "message" ? "message-modal" : "reminder-modal";
+        let modal = document.getElementById(modalId);
+        modal.style.display = "block";
+      }
+
+      function closeModal() {
+        let modals = document.querySelectorAll(".notification-modal");
+        modals.forEach((modal) => {
+          modal.style.display = "none";
+        });
+      }
+
+      function showDetailedInfo(type) {
+            let additionalInfoContainer = document.getElementById('additional-info-container');
+            let additionalCard = document.createElement('div');
+            additionalCard.classList.add('additional-card');
+
+            if (type === 'heartRate') {
+                additionalCard.innerHTML = `
+                    <h4>Rythme Cardiaque : 75 BPM</h4>
+                    <p>Votre rythme cardiaque est de 75 battements par minute (BPM). Ce rythme est dans la plage normale pour un adulte en bonne santé au repos. Cela signifie que votre cœur fonctionne efficacement et qu'il n'y a pas de signes évidents de problèmes cardiaques.</p>
+                    <p><strong>Conseils :</strong></p>
+                    <ul>
+                        <li>Maintenez une activité physique régulière pour garder votre cœur en bonne santé.</li>
+                        <li>Évitez le stress excessif, car cela peut augmenter votre rythme cardiaque.</li>
+                        <li>Assurez-vous d'avoir une alimentation saine et équilibrée.</li>
+                        <li>Si vous ressentez des palpitations ou des douleurs thoraciques, consultez immédiatement un médecin.</li>
+                    </ul>
+                `;
+            } else if (type === 'bloodPressure') {
+                additionalCard.innerHTML = `
+                    <h4>Tension Artérielle : 120/80 mmHg</h4>
+                    <p>Votre tension artérielle est de 120/80 mmHg, ce qui est considéré comme normal. La pression systolique (120) indique la force du sang contre les parois des artères lorsque votre cœur bat, et la pression diastolique (80) indique la force du sang entre deux battements de cœur.</p>
+                    <p><strong>Conseils :</strong></p>
+                    <ul>
+                        <li>Maintenez une alimentation faible en sel pour favoriser une pression artérielle stable.</li>
+                        <li>Faites de l'exercice régulièrement pour renforcer votre cœur et améliorer la circulation sanguine.</li>
+                        <li>Limitez la consommation d'alcool et évitez de fumer, car cela peut augmenter la pression artérielle.</li>
+                        <li>Surveillez régulièrement votre tension artérielle pour vous assurer qu'elle reste dans la plage normale.</li>
+                    </ul>
+                `;
+            }
+
+            // Append the new card to the container
+            additionalInfoContainer.innerHTML = ''; // Clear previous cards
+            additionalInfoContainer.appendChild(additionalCard);
+        }
+    </script>
+  </body>
+</html>

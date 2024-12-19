@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMI - Dashboard Cardio-Vasculaire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="AMI Logo" />
+                <h2>AFIA</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><i class="fas fa-home"></i> Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="patients.html"><i class="fas fa-user-injured"></i> Patients</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-heartbeat"></i> Diagnostics</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-calendar-alt"></i> Rendez-vous</a>
+                </li>
+                <li>
+                    <a href="statistique.html"><i class="fas fa-chart-line"></i> Statistiques</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <h1>Tableau de Bord</h1>
+                    <p>Assistant Médical Intelligent - Cardio-Vasculaire</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Rechercher..." />
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="doctor-avatar.png" alt="Profile" />
+                        <span>Dr. Martin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Statistics Cards -->
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3>Patients Totaux</h3>
+                        <p>1,234</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hospital-user"></i>
+                    <div class="stat-info">
+                        <h3>Nouveaux Patients</h3>
+                        <p>28</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <div class="stat-info">
+                        <h3>RDV Aujourd'hui</h3>
+                        <p>12</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-heart"></i>
+                    <div class="stat-info">
+                        <h3>Cas Critiques</h3>
+                        <p>5</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="chart-container">
+                    <h3>Évolution des Cas</h3>
+                    <canvas id="casesChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Distribution des Pathologies</h3>
+                    <canvas id="pathologiesChart"></canvas>
+                </div>
+
+                <!-- Recent Patients Table -->
+                <div class="recent-patients">
+                    <h3>Patients Récents</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Diagnostic</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jean Dupont</td>
+                                <td>Hypertension</td>
+                                <td>23/11/2023</td>
+                                <td><span class="status stable">Stable</span></td>
+                            </tr>
+                            <tr>
+                                <td>Marie Martin</td>
+                                <td>Arythmie</td>
+                                <td>23/11/2023</td>
+                                <td><span class="status critical">Critique</span></td>
+                            </tr>
+                            <tr>
+                                <td>Paul Bernard</td>
+                                <td>Insuffisance cardiaque</td>
+                                <td>22/11/2023</td>
+                                <td><span class="status observation">En observation</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
