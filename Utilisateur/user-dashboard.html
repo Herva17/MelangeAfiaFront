@@ -24,16 +24,17 @@
         </div>
         <ul class="nav-links">
           <li class="active">
-            <a href="user-dashboard.html"><i class="fas fa-heart">AFIA</i> </a>
+            <a href="user-dashboard.html"><i class="fas fa-heart">Ma sante</i> </a>
           </li>
           <li>
-            <a href="notification.html"><i class="fas fa-bell">NOTIF</i></a>
+            <a href="notification.html"><i class="fas fa-bell">Notifications</i></a>
           </li>
           <li>
-            <a href="parametre.html"><i class="fas fa-cog">PARAM</i> </a>
+            <a href="parametre.html"><i class="fas fa-cog">Compte</i> </a>
           </li>
         </ul>
       </nav>
+
 
       <!-- Main Content -->
       <main class="main-content">
@@ -45,7 +46,7 @@
           <div class="header-right">
             <div class="notifications">
               <i class="fas fa-bell"></i>
-              <span class="notification-badge">3</span>
+              <span class="notification-badge">2</span>
             </div>
             <div class="user-profile">
               <img src="user-avatar.png" alt="Profile" />
@@ -60,86 +61,95 @@
           <div class="health-status-card">
             <h3>État de Santé Actuel</h3>
             <div class="vital-signs">
-              <div class="vital-sign" onclick="showDetailedInfo('heartRate')">
-                <i class="fas fa-heartbeat"></i>
-                <p>Rythme Cardiaque</p>
-                <h4>75 BPM</h4>
-              </div>
-              <div
-                class="vital-sign"
-                onclick="showDetailedInfo('bloodPressure')"
-              >
-                <i class="fas fa-stethoscope"></i>
-                <p>Tension Artérielle</p>
-                <h4>120/80</h4>
-              </div>
+                <div class="vital-sign" onclick="showDetailedInfo('heartRate', 80)">
+                    <i class="fas fa-heartbeat"></i>
+                    <p>Rythme Cardiaque</p>
+                    <h4 id="heartRateDisplay">80 BPM</h4>
+                </div>
+                <div class="vital-sign" onclick="showDetailedInfo('bloodPressure', { systolic: 120, diastolic: 80 })">
+                    <i class="fas fa-stethoscope"></i>
+                    <p>Tension Artérielle</p>
+                    <h4 id="bloodPressureDisplay">120/80</h4>
+                </div>
             </div>
-          </div>
+        </div>
+        
+        
+        
 
           <!-- Placeholder for Additional Cards (detailed info) -->
           <div id="additional-info-container"></div>
 
           <!-- Dernières notifications -->
-          
-
-          <!-- Modal for Message -->
-          
-          </div>
-
-          <!-- Paramètres du compte -->
-          
         </div>
       </main>
     </div>
-    <script>
-      function showModal(type, time, title) {
-        let modalId = type === "message" ? "message-modal" : "reminder-modal";
-        let modal = document.getElementById(modalId);
-        modal.style.display = "block";
-      }
 
-      function closeModal() {
-        let modals = document.querySelectorAll(".notification-modal");
-        modals.forEach((modal) => {
-          modal.style.display = "none";
+    <!-- <script>
+      // Fonction pour appeler l'API OpenAI et récupérer des conseils personnalisés
+      async function getChatGPTAdvice(type) {
+        const apiKey = 'VOTRE_CLÉ_API_OPENAI'; // Remplacez par votre clé API OpenAI
+
+        const prompt = type === 'heartRate' ?
+            'Donne-moi des conseils santé sur un rythme cardiaque normal de 75 BPM.' :
+            'Donne-moi des conseils santé sur une tension artérielle de 120/80 mmHg.';
+
+        const requestBody = {
+            model: 'gpt-4', // Ou gpt-3.5-turbo selon ce que vous avez accès
+            messages: [
+                { role: 'system', content: 'Tu es un assistant médical.' },
+                { role: 'user', content: prompt }
+            ],
+            max_tokens: 300,
+        };
+
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify(requestBody)
         });
+
+        const data = await response.json();
+        return data.choices[0].message.content; // Récupère la réponse de ChatGPT
       }
 
-      function showDetailedInfo(type) {
-            let additionalInfoContainer = document.getElementById('additional-info-container');
-            let additionalCard = document.createElement('div');
-            additionalCard.classList.add('additional-card');
+      // Fonction pour afficher des informations détaillées et des conseils sur l'état de santé
+      async function showDetailedInfo(type) {
+        let additionalInfoContainer = document.getElementById('additional-info-container');
+        let additionalCard = document.createElement('div');
+        additionalCard.classList.add('additional-card');
 
-            if (type === 'heartRate') {
-                additionalCard.innerHTML = `
-                    <h4>Rythme Cardiaque : 75 BPM</h4>
-                    <p>Votre rythme cardiaque est de 75 battements par minute (BPM). Ce rythme est dans la plage normale pour un adulte en bonne santé au repos. Cela signifie que votre cœur fonctionne efficacement et qu'il n'y a pas de signes évidents de problèmes cardiaques.</p>
-                    <p><strong>Conseils :</strong></p>
-                    <ul>
-                        <li>Maintenez une activité physique régulière pour garder votre cœur en bonne santé.</li>
-                        <li>Évitez le stress excessif, car cela peut augmenter votre rythme cardiaque.</li>
-                        <li>Assurez-vous d'avoir une alimentation saine et équilibrée.</li>
-                        <li>Si vous ressentez des palpitations ou des douleurs thoraciques, consultez immédiatement un médecin.</li>
-                    </ul>
-                `;
-            } else if (type === 'bloodPressure') {
-                additionalCard.innerHTML = `
-                    <h4>Tension Artérielle : 120/80 mmHg</h4>
-                    <p>Votre tension artérielle est de 120/80 mmHg, ce qui est considéré comme normal. La pression systolique (120) indique la force du sang contre les parois des artères lorsque votre cœur bat, et la pression diastolique (80) indique la force du sang entre deux battements de cœur.</p>
-                    <p><strong>Conseils :</strong></p>
-                    <ul>
-                        <li>Maintenez une alimentation faible en sel pour favoriser une pression artérielle stable.</li>
-                        <li>Faites de l'exercice régulièrement pour renforcer votre cœur et améliorer la circulation sanguine.</li>
-                        <li>Limitez la consommation d'alcool et évitez de fumer, car cela peut augmenter la pression artérielle.</li>
-                        <li>Surveillez régulièrement votre tension artérielle pour vous assurer qu'elle reste dans la plage normale.</li>
-                    </ul>
-                `;
-            }
+        // Appel à l'API pour obtenir des conseils supplémentaires
+        let additionalAdvice = await getChatGPTAdvice(type);
 
-            // Append the new card to the container
-            additionalInfoContainer.innerHTML = ''; // Clear previous cards
-            additionalInfoContainer.appendChild(additionalCard);
+        if (type === 'heartRate') {
+          additionalCard.innerHTML = `
+            <h4>Rythme Cardiaque : 75 BPM</h4>
+            <p>Votre rythme cardiaque est de 75 battements par minute (BPM). Ce rythme est dans la plage normale pour un adulte en bonne santé au repos. Cela signifie que votre cœur fonctionne efficacement et qu'il n'y a pas de signes évidents de problèmes cardiaques.</p>
+            <p><strong>Conseils :</strong></p>
+            <ul>
+                <li>${additionalAdvice}</li>
+            </ul>
+          `;
+        } else if (type === 'bloodPressure') {
+          additionalCard.innerHTML = `
+            <h4>Tension Artérielle : 120/80 mmHg</h4>
+            <p>Votre tension artérielle est de 120/80 mmHg, ce qui est considéré comme normal. La pression systolique (120) indique la force du sang contre les parois des artères lorsque votre cœur bat, et la pression diastolique (80) indique la force du sang entre deux battements de cœur.</p>
+            <p><strong>Conseils :</strong></p>
+            <ul>
+                <li>${additionalAdvice}</li>
+            </ul>
+          `;
         }
-    </script>
+
+        // Ajout de la nouvelle carte au conteneur
+        additionalInfoContainer.innerHTML = ''; // Efface les cartes précédentes
+        additionalInfoContainer.appendChild(additionalCard);
+      }
+    </script> -->
+    <script src="scripts.js"></script>
   </body>
 </html>

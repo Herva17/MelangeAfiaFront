@@ -24,13 +24,13 @@
         </div>
         <ul class="nav-links">
           <li class="active">
-            <a href="user-dashboard.html"><i class="fas fa-heart"></i> </a>
+            <a href="user-dashboard.html"><i class="fas fa-heart">Ma sante</i> </a>
           </li>
           <li>
-            <a href="notification.html"><i class="fas fa-bell"></i></a>
+            <a href="notification.html"><i class="fas fa-bell">Notifications</i></a>
           </li>
           <li>
-            <a href="parametre.html"><i class="fas fa-cog"></i> </a>
+            <a href="parametre.html"><i class="fas fa-cog">Compte</i> </a>
           </li>
         </ul>
       </nav>
@@ -39,13 +39,13 @@
       <main class="main-content">
         <header>
           <div class="header-left">
-            <h1>Mon Espace Santé</h1>
+            <h1>Mon Espace Compte</h1>
             <p>Suivi Personnel - AFIA</p>
           </div>
           <div class="header-right">
             <div class="notifications">
               <i class="fas fa-bell"></i>
-              <span class="notification-badge">3</span>
+              <span class="notification-badge">2</span>
             </div>
             <div class="user-profile">
               <img src="user-avatar.png" alt="Profile" />
@@ -76,55 +76,7 @@
         </div>
       </main>
     </div>
-    <script>
-      function showModal(type, time, title) {
-        let modalId = type === "message" ? "message-modal" : "reminder-modal";
-        let modal = document.getElementById(modalId);
-        modal.style.display = "block";
-      }
-
-      function closeModal() {
-        let modals = document.querySelectorAll(".notification-modal");
-        modals.forEach((modal) => {
-          modal.style.display = "none";
-        });
-      }
-
-      function showDetailedInfo(type) {
-            let additionalInfoContainer = document.getElementById('additional-info-container');
-            let additionalCard = document.createElement('div');
-            additionalCard.classList.add('additional-card');
-
-            if (type === 'heartRate') {
-                additionalCard.innerHTML = `
-                    <h4>Rythme Cardiaque : 75 BPM</h4>
-                    <p>Votre rythme cardiaque est de 75 battements par minute (BPM). Ce rythme est dans la plage normale pour un adulte en bonne santé au repos. Cela signifie que votre cœur fonctionne efficacement et qu'il n'y a pas de signes évidents de problèmes cardiaques.</p>
-                    <p><strong>Conseils :</strong></p>
-                    <ul>
-                        <li>Maintenez une activité physique régulière pour garder votre cœur en bonne santé.</li>
-                        <li>Évitez le stress excessif, car cela peut augmenter votre rythme cardiaque.</li>
-                        <li>Assurez-vous d'avoir une alimentation saine et équilibrée.</li>
-                        <li>Si vous ressentez des palpitations ou des douleurs thoraciques, consultez immédiatement un médecin.</li>
-                    </ul>
-                `;
-            } else if (type === 'bloodPressure') {
-                additionalCard.innerHTML = `
-                    <h4>Tension Artérielle : 120/80 mmHg</h4>
-                    <p>Votre tension artérielle est de 120/80 mmHg, ce qui est considéré comme normal. La pression systolique (120) indique la force du sang contre les parois des artères lorsque votre cœur bat, et la pression diastolique (80) indique la force du sang entre deux battements de cœur.</p>
-                    <p><strong>Conseils :</strong></p>
-                    <ul>
-                        <li>Maintenez une alimentation faible en sel pour favoriser une pression artérielle stable.</li>
-                        <li>Faites de l'exercice régulièrement pour renforcer votre cœur et améliorer la circulation sanguine.</li>
-                        <li>Limitez la consommation d'alcool et évitez de fumer, car cela peut augmenter la pression artérielle.</li>
-                        <li>Surveillez régulièrement votre tension artérielle pour vous assurer qu'elle reste dans la plage normale.</li>
-                    </ul>
-                `;
-            }
-
-            // Append the new card to the container
-            additionalInfoContainer.innerHTML = ''; // Clear previous cards
-            additionalInfoContainer.appendChild(additionalCard);
-        }
-    </script>
+    <script src="scripts.js">
+          </script>
   </body>
 </html>
