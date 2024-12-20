@@ -443,3 +443,97 @@ tr:hover {
   border: 1px solid #ccc;
 }
 
+
+.diagnostics-section {
+    margin-top: 30px;
+}
+
+.diagnostic-card {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diagnostic-card i {
+    font-size: 30px;
+    margin-right: 20px;
+    color: #2980b9;
+}
+
+.diagnostic-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.diagnostic-info p {
+    margin: 5px 0 0;
+    color: #7f8c8d;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-container h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #2c3e50;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group input[type="date"] {
+    padding: 5px;
+}
+
+.btn-submit {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #3498db;
+}
+
+.chart-container {
+    margin-top: 40px;
+}
+
+canvas {
+    max-width: 100%;
+    height: 300px;
+}

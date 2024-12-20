@@ -108,68 +108,95 @@
             <h3>Distribution des Pathologies</h3>
             <canvas id="pathologiesChart"></canvas>
           </div>
-
-          <!-- Recent Patients Table -->
+          
+          <!-- prelevement -->
           <div class="recent-patients">
-            <h3>Patients Récents</h3>
-            
-            <!-- Champ de recherche -->
-            <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un patient..." onkeyup="filterPatients()">
-            
+            <h3>Prélevement Recents</h3>
             <table>
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nom</th>
-                  <th>Prenom</th>
-                  <th>Sexe</th>
-                  <th>Date Naissance</th>
-                  <th>Poids</th>
-                  <th>Taille</th>
-                  <th>Diagnostic</th>
-                  <th>IOT</th>
-                  <th>Statut</th>
+                  <th>patient</th>
+                  <th>saturation_O</th>
+                  <th>pression_A</th>
+                  <th>temperature</th>
+                  <th>frequence_C</th>
+                  <th>date</th>
                 </tr>
               </thead>
-              <tbody id="patientsTableBody">
+              <tbody>
                 <tr>
-                  <td>1</td>
-                  <td>Jean Dupont</td>
-                  <td>Jacques</td>
-                  <td>F</td>
-                  <td>23/11/2023</td>
-                  <td>78</td>
-                  <td>1.8</td>
-                  <td>Hypertension</td>
                   <td></td>
-                  <td><span class="status stable">Stable</span></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jean Dupont</td>
-                  <td>Jacques</td>
-                  <td>F</td>
-                  <td>23/11/2023</td>
-                  <td>78</td>
-                  <td>1.8</td>
-                  <td>Hypertension</td>
                   <td></td>
-                  <td><span class="status critical">Critique</span></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Jean Dupont</td>
-                  <td>Jacques</td>
-                  <td>F</td>
-                  <td>23/11/2023</td>
-                  <td>78</td>
-                  <td>1.8</td>
-                  <td>Hypertension</td>
                   <td></td>
-                  <td><span class="status observation">En observation</span></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
-            </table>
+            </table><br>
+            <!-- Ajouter un prélèvement -->
+            <button id="add-prelevement-btn" class="btn btn-primary mt-3">
+              Ajouter un Prélèvement
+            </button>
+
+            <!-- Formulaire pour ajouter un prélèvement -->
+            <div id="prelevement-form-card">
+                <h4>Ajouter un Prélèvement</h4>
+                <div class="form-scroll-container">
+                  <form id="prelevement-form-content">
+                    <div class="mb-3">
+                      <label for="patient-name" class="form-label">Nom du patient</label>
+                      <select class="form-control" id="patient-name">
+                        <option value="patient1">Patient 1</option>
+                        <option value="patient2">Patient 2</option>
+                        <option value="patient3">Patient 3</option>
+                      </select>
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="saturation-o" class="form-label">Saturation en O2 (%)</label>
+                      <input type="number" class="form-control" id="saturation-o" placeholder="Saturation en O2" />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="stolic-bp" class="form-label">Pression Artérielle Systolique (mmHg)</label>
+                      <input type="number" class="form-control" id="stolic-bp" placeholder="Systolic BP" />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="diastolic-bp" class="form-label">Pression Artérielle Diastolique (mmHg)</label>
+                      <input type="number" class="form-control" id="diastolic-bp" placeholder="Diastolic BP" />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="temperature" class="form-label">Température (°C)</label>
+                      <input type="number" class="form-control" id="temperature" placeholder="Température" />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="frequence-c" class="form-label">Fréquence Cardiaque (bpm)</label>
+                      <input type="number" class="form-control" id="frequence-c" placeholder="Fréquence Cardiaque" />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="bmi" class="form-label">BMI (Indice de Masse Corporelle)</label>
+                      <input type="text" class="form-control" id="bmi" placeholder="BMI" disabled />
+                    </div>
+              
+                    <div class="mb-3">
+                      <label for="date-prelevement" class="form-label">Date du prélèvement</label>
+                      <input type="date" class="form-control" id="date-prelevement" />
+                    </div>
+              
+                    <button type="submit" class="btn btn-success w-100">Ajouter</button>
+                    <button type="button" id="close-form-btn" class="btn btn-secondary w-100 mt-2">Fermer</button>
+                  </form>
+                </div>
+              </div>
+              
+              
           </div>
         </div>
       </main>

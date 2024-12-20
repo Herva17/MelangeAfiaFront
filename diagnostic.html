@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMI - Dashboard Cardio-Vasculaire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url("{% static '/hyperpredict/images/predict1.png' %}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        
+        .main {
+            position: fixed;
+            top: 140px;
+            left: 410px;
+            width: 550px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 5%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        h1 {
+            color: #0086b3;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+    
+        td {
+            padding: 10px;
+            font-size: 16px;
+        }
+    
+        td input[type="text"], td select, td input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+    
+        td input[type="text"]:focus, td select:focus, td input[type="date"]:focus {
+            border-color: #0086b3;
+        }
+    
+        input[type="submit"] {
+            background-color: #4dc3ff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #009cdb;
+        }
+    
+        .form-container {
+            margin-top: 30px;
+        }
+    
+        .form-container .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-container label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+    
+        .form-container input[type="text"], .form-container input[type="date"], .form-container select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+    
+        .form-container input[type="text"]:focus, .form-container input[type="date"]:focus, .form-container select:focus {
+            border-color: #0086b3;
+        }
+    
+        .form-container button[type="submit"] {
+            background-color: #4dc3ff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+    
+        .form-container button[type="submit"]:hover {
+            background-color: #009cdb;
+        }
+    
+        .form-container h3 {
+            text-align: center;
+            font-size: 24px;
+            color: #0086b3;
+            margin-bottom: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="AMI Logo" />
+                <h2>AFIA</h2>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="index.html"><i class="fas fa-home"></i> Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="patients.html"><i class="fas fa-user-injured"></i> Patients</a>
+                </li>
+                <li class="active">
+                    <a href="diagnostics.html"><i class="fas fa-heartbeat"></i> Diagnostics</a>
+                </li>
+                <li>
+                    <a href="rendezvous.html"><i class="fas fa-calendar-alt"></i> Rendez-vous</a>
+                </li>
+                <li>
+                    <a href="statistique.html"><i class="fas fa-chart-line"></i> Statistiques</a>
+                </li>
+                <li>
+                    <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <h1>Diagnostics</h1>
+                    <p>Assistant Médical Intelligent - Cardio-Vasculaire</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Rechercher un diagnostic..." />
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="doctor-avatar.png" alt="Profile" />
+                        <span>Dr. Martin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="diagnostics-section">
+                <!-- Diagnostic Cards -->
+                <div class="diagnostic-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <div class="diagnostic-info">
+                        <h3>Cardiopathie</h3>
+                        <p>Nombre de cas : 98</p>
+                    </div>
+                </div>
+                <div class="diagnostic-card">
+                    <i class="fas fa-lungs"></i>
+                    <div class="diagnostic-info">
+                        <h3>Insuffisance respiratoire</h3>
+                        <p>Nombre de cas : 45</p>
+                    </div>
+                </div>
+                <div class="diagnostic-card">
+                    <i class="fas fa-brain"></i>
+                    <div class="diagnostic-info">
+                        <h3>Accident Vasculaire Cérébral</h3>
+                        <p>Nombre de cas : 15</p>
+                    </div>
+                </div>
+                <div class="diagnostic-card">
+                    <i class="fas fa-diagnoses"></i>
+                    <div class="diagnostic-info">
+                        <h3>Hypertension</h3>
+                        <p>Nombre de cas : 210</p>
+                    </div>
+                </div>
+
+                <!-- Remplacer le formulaire de diagnostic avec celui fourni -->
+                <div class="form-container">
+                    <h3>Ajouter un Diagnostic</h3>
+                    <form action="result" method="POST">
+                        <table>
+                            <tr>
+                                <td align="right">Birth Age(yrs):</td>
+                                <td align="left"><input type="text" name="n1"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Gender:</td>
+                                <td align="left"><input type="text" name="n2"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Weight(kg):</td>
+                                <td align="left"><input type="text" name="n3"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Body Fat:</td>
+                                <td align="left"><input type="text" name="n4"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Visceral Fat:</td>
+                                <td align="left"><input type="text" name="n5"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">BMI:</td>
+                                <td align="left"><input type="text" name="n6"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Systolic BP:</td>
+                                <td align="left"><input type="text" name="n7"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Diasttolic BP:</td>
+                                <td align="left"><input type="text" name="n8"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Pulse:</td>
+                                <td align="left"><input type="text" name="n9"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Suger Fasting:</td>
+                                <td align="left"><input type="text" name="n10"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Sugar PP:</td>
+                                <td align="left"><input type="text" name="n11"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">obese_meter:</td>
+                                <td align="left"><input type="text" name="n12"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">hypertension_meter:</td>
+                                <td align="left"><input type="text" name="n13"> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">bloodsugar_meter:</td>
+                                <td align="left"><input type="text" name="n14"> </td>
+                            </tr>
+                        </table>
+                        <input type="submit" value="Ajouter le diagnostic">
+                    </form>
+                </div>
+
+                <!-- Diagnostic Statistics -->
+                <div class="chart-container">
+                    <h3>Répartition des Diagnostiques</h3>
+                    <canvas id="diagnosticChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Sample Chart for Diagnostic Distribution
+        const ctx = document.getElementById('diagnosticChart').getContext('2d');
+        const diagnosticChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Cardiopathie', 'Insuffisance respiratoire', 'Accident Vasculaire Cérébral', 'Hypertension'],
+                datasets: [{
+                    label: 'Répartition des Diagnostics',
+                    data: [98, 45, 15, 210],
+                    backgroundColor: ['#FF9999', '#66CCFF', '#FFCC00', '#99FF99'],
+                    borderColor: ['#FF6666', '#3399CC', '#FF9900', '#66FF66'],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
